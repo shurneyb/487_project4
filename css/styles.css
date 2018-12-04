@@ -1,20 +1,64 @@
+/* Global */
+
 .flex{
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
 }
 
+.center-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 a{
   text-decoration: none;
-  color: #000;
+  color: rgb(17, 0, 255);
 }
+
+/* End Global */
+
+/* Grid */
+
+.college-card{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 50px 428px;
+  grid-gap: 0.5em;
+  font-family: Helvetica;
+  grid-template-areas:
+  "header header"
+  "info map"
+}
+
+.card-header{
+  grid-area: header;
+  background: #eeaa;
+}
+
+.card-info{
+  grid-area: info;
+  background: #aaee;
+}
+
+.card-map{
+  grid-area: map;
+  background: #eedd;
+}
+
+/* End Grid */
 
 .college-card{
   border: 1px;
   padding: 10px;
   margin: 10px;
   box-shadow: 2px 2px 5px #ccc;
-  cursor: pointer;
+}
+
+#map{
+  width: 100%;
+  height: 100%;
 }
 
 .thumbnail{
