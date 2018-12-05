@@ -24,7 +24,7 @@ a{
 .college-card{
   display:grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 50px 428px;
+  grid-template-rows: 50px auto;
   grid-gap: 0.5em;
   font-family: Helvetica;
   grid-template-areas:
