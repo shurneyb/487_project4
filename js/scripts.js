@@ -189,21 +189,27 @@ $(document).ready(function(){
         for ( let i = 0; i < collegeData.length; i++ ) {
           let id = 'button#map-btn' + i + '.map-btn';
           $(id).on('click', (e) => {
-            handleCardClick(e,i);
+            initMap(e, i);
           });
         }
         buildChart();
       }
     }); //end of ajax
     // End US Dept. of Education API
-
+    
   });
   
   // Functions
   {
-    function handleCardClick(e, i){
-      console.log(i);
-      initMap(i);
+    function initMap(e, i) {
+      // The location of Uluru
+      collegeCoords.lat = locationData[i].lat;
+      collegeCoords.lng = locationData[i].lon;
+      // The map, centered at Uluru
+      var map = new google.maps.Map(
+      document.getElementById('card-map' + i), {zoom: 16, center: collegeCoords});
+      // The marker, positioned at Uluru
+      var marker = new google.maps.Marker({position: collegeCoords, map: map});
     }
     
     // Source: https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
@@ -211,18 +217,6 @@ $(document).ready(function(){
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     // End Source
-    
-    function initMap(i) {
-      // The location of Uluru
-      collegeCoords.lat = locationData[i].lat;
-      collegeCoords.lng = locationData[i].lon;
-      // The map, centered at Uluru
-      var map = new google.maps.Map(
-        document.getElementById('card-map' + i), {zoom: 16, center: collegeCoords});
-        // The marker, positioned at Uluru
-        var marker = new google.maps.Marker({position: collegeCoords, map: map});
-      }
-    }
     function buildChart(){ // Make chart based off of mean student earnings per college
       var myChart = Highcharts.chart('earnings', {
         chart: {
@@ -250,4 +244,5 @@ $(document).ready(function(){
       });
       // End functions
     }
-  });
+  }
+});
