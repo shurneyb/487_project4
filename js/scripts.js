@@ -1,7 +1,7 @@
 $(document).ready(function(){
   console.log('scripts loaded');
   
-  // Global variables
+  // General variables
   {
     var myKey = config.MY_KEY;
     var query = '';
@@ -13,11 +13,10 @@ $(document).ready(function(){
     var latestData;
     var schoolData;
     var meanEarningsClean = [];
-    var collegeDataClean = [];
     var locationDataClean = [];
     var namesArrayClean = [];
   }
-  // End global variables
+  // End general variables
   
   // College data variables
   {
@@ -54,7 +53,8 @@ $(document).ready(function(){
       success: function(data){
         console.log(data);
         collegeData = data.results;
-        if (collegeData.length == 0){
+
+        if (collegeData.length == 0){ // Gives the user certain feedback if their search results are empty
           $('#earnings').hide();
           $('#loading').hide();
           $('#error').show();
@@ -177,9 +177,9 @@ $(document).ready(function(){
           $('#results').html(html);
           $('#loading').hide();
         }
-        
+
+        // These functions get rid of empty array entries
         meanEarningsClean = meanEarnings.filter(function(v){return v!==null});
-        collegeDataClean = collegeData.filter(function(v){return v!==null});
         locationDataClean = locationData.filter(function(v){return v!==null});
         namesArrayClean = namesArray.filter(function(v){return v!==null});
         
@@ -189,7 +189,7 @@ $(document).ready(function(){
         for ( let i = 0; i < collegeData.length; i++ ) {
           let id = 'button#map-btn' + i + '.map-btn';
           $(id).on('click', (e) => {
-            initMap(e, i);
+            initMap(e, i, collegeCoords);
           });
         }
         buildChart();
@@ -201,17 +201,16 @@ $(document).ready(function(){
   
   // Functions
   {
-    function initMap(e, i) {
-      // The location of Uluru
-      collegeCoords.lat = locationData[i].lat;
-      collegeCoords.lng = locationData[i].lon;
-      // The map, centered at Uluru
+    function initMap(e, i, coords) {
+      // The location of the college
+      coords.lat = locationDataClean[i].lat;
+      coords.lng = locationDataClean[i].lon;
+
       var map = new google.maps.Map(
-      document.getElementById('card-map' + i), {zoom: 16, center: collegeCoords});
-      // The marker, positioned at Uluru
-      var marker = new google.maps.Marker({position: collegeCoords, map: map});
+      document.getElementById('card-map' + i), {zoom: 16, center: coords});
+
+      var marker = new google.maps.Marker({position: coords, map: map});
     }
-    
     // Source: https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
     function numberWithCommas(x) { //adds commas to large numbers
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -223,7 +222,7 @@ $(document).ready(function(){
           type: 'column'
         },
         title: {
-          text: 'Mean Yearly Salary of Students 4 Years After Graduation'
+          text: 'Mean Annual Salary of Students 4 Years After Graduation'
         },
         subtitle: {
           text: 'Source: U.S. Department of Education'

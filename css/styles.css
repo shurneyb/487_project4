@@ -29,7 +29,7 @@ h1{
 }
 
 p{
-  font-size: 20px;
+  font-size: 18px;
   margin: 15px 50px;
 }
 
@@ -101,7 +101,7 @@ button {
   font-size: 16px;
 }
 
-input{
+#query{
   border-radius: 3px;
   border: 1px solid;
   height: 18px;
@@ -140,7 +140,7 @@ button:hover{
 
   p{
     font-size: 12px;
-    margin: 8px 5px;
+    margin: 12px 10px;
   }
 
   .college-card{
@@ -159,6 +159,30 @@ button:hover{
     max-width: 95%;
     margin: auto;
   }
+
+  .center-text{
+    text-align: center;
+  }
+
+  #query-wrapper{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  #query{
+    height: 30px;
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 200px;
+  }
+
+  #search-button{
+    width: 70px;
+    height: 38px;
+  }
+
 }
 
 /* End Mobile Styles */
