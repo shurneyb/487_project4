@@ -38,6 +38,7 @@ $(document).ready(function(){
   
   // US Dept. of Education API
   $('button').click(function(){
+    $('#error').hide(); // Get rid of error if it's still around
     $('#loading').show();
     query = $('#query').val();
     console.log(query);
@@ -57,7 +58,11 @@ $(document).ready(function(){
         if (collegeData.length == 0){ // Gives the user certain feedback if their search results are empty
           $('#earnings').hide();
           $('#loading').hide();
+          $('#results').hide();
           $('#error').show();
+        }else{
+          $('#results').show();
+          $('#earnings').show();
         }
         
         for (i = 0; i < collegeData.length; i++){ //loop through colleges to make cards
@@ -180,12 +185,17 @@ $(document).ready(function(){
           }
           $('#results').html(html);
           $('#loading').hide();
+          $('#error').hide();
         }
 
         // These functions get rid of empty array entries
         meanEarningsClean = meanEarnings.filter(function(v){return v!==null});
         locationDataClean = locationData.filter(function(v){return v!==null});
         namesArrayClean = namesArray.filter(function(v){return v!==null});
+
+        if (collegeData.length != 0){
+          buildChart();
+        }
         
         for ( let i = 0; i < collegeData.length; i++ ) {
           let id = 'button#map-btn' + i + '.map-btn';
@@ -193,7 +203,6 @@ $(document).ready(function(){
             initMap(e, i, collegeCoords);
           });
         }
-        buildChart();
       }
     }); //end of ajax
     // End US Dept. of Education API
