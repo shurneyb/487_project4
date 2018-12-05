@@ -86,6 +86,10 @@ $(document).ready(function(){
               reading = 'N/A';
               writing = 'N/A';
               math = 'N/A';
+            }else if (latestData.admissions.sat_scores.midpoint.writing == null){
+              reading = latestData.admissions.sat_scores.midpoint.critical_reading;
+              math = latestData.admissions.sat_scores.midpoint.math;
+              writing = 'N/A';
             }else{
               reading = latestData.admissions.sat_scores.midpoint.critical_reading;
               writing = latestData.admissions.sat_scores.midpoint.writing;
@@ -182,9 +186,6 @@ $(document).ready(function(){
         meanEarningsClean = meanEarnings.filter(function(v){return v!==null});
         locationDataClean = locationData.filter(function(v){return v!==null});
         namesArrayClean = namesArray.filter(function(v){return v!==null});
-        
-        console.log(meanEarningsClean);
-        console.log(namesArrayClean);
         
         for ( let i = 0; i < collegeData.length; i++ ) {
           let id = 'button#map-btn' + i + '.map-btn';
