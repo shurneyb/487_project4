@@ -4,14 +4,27 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
 </head>
 <body>
   
-  <input id="query" type="text"/>
-  <button>Submit</button>
-  <a id="aboy">click me</a>
+  <div class="center-flex">
+    <h1>College Finder and Analyzer</h1>
+  </div>
 
+  <div id="exposition-wrapper">
+    <p>Type in the name of a college or university system to analyze the statistics of relevant colleges. For example, try typing in "University of North Carolina" to compare North Carolina's public universites.</p>
+  </div>
+  
+  <div id="query-wrapper" class="center-flex">
+    <input id="query" type="text"/>
+    <button>Search</button>
+  </div>
+
+  <p id="loading">Loading...</p>
+  <p id="error">No colleges matched your query, try using a search without acronyms or initials</p>
+  
   <div id="results"></div>
   <div id="earnings"></div>
   

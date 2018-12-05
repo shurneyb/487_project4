@@ -17,6 +17,22 @@ a{
   color: rgb(17, 0, 255);
 }
 
+body{
+  margin: 0 15%;
+  font-family: 'Merriweather', serif;
+  background: #dff6ff;
+}
+
+h1{
+  margin: 0;
+  margin-top: 10px;
+}
+
+p{
+  font-size: 20px;
+  margin: 15px 50px;
+}
+
 /* End Global */
 
 /* Grid */
@@ -25,8 +41,8 @@ a{
   display:grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 50px auto;
-  grid-gap: 0.5em;
-  font-family: Helvetica;
+  grid-gap: 0.25em;
+  background: #fff;
   grid-template-areas:
   "header header"
   "info map"
@@ -34,21 +50,23 @@ a{
 
 .card-header{
   grid-area: header;
-  background: #eeaa;
+  background: rgb(211, 211, 211);
 }
 
 .card-info{
   grid-area: info;
-  background: #aaee;
+  background: rgba(255, 255, 188, 0.74);
+  padding-left: 20px;
 }
 
 .card-map{
   grid-area: map;
-  background: #eedd;
+  background: rgba(166, 172, 255, 0.685);
 }
 
 /* End Grid */
 
+/* Body */
 .college-card{
   border: 1px;
   padding: 10px;
@@ -72,6 +90,39 @@ a{
   flex-basis: 80%;
 }
 
-body{
-  margin: 0 15%;
+button {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #ff2323;
+  border-radius: 3px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
+
+input{
+  border-radius: 3px;
+  border: 1px solid;
+  height: 18px;
+  margin-right: 15px;
+}
+
+.map-btn{
+  border: none;
+  color: #011097;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+#loading{
+  display: none;
+}
+
+#error{
+  display: none;
+}
+
+/* End Body */

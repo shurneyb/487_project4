@@ -9,11 +9,9 @@ $(document).ready(function(){
     var data;
     var html = '';
     var i;
-    var j;
     var collegeData = [];
     var latestData;
     var schoolData;
-    var data2;
     var meanEarningsClean = [];
     var collegeDataClean = [];
     var locationDataClean = [];
@@ -34,7 +32,6 @@ $(document).ready(function(){
     var enrollment;
     var collegeCoords = {lat: 0.0, lng: 0.0};
     var locationData = [];
-    var numCards = 0;
     var meanEarnings = [];
     var namesArray = [];
   }
@@ -42,6 +39,7 @@ $(document).ready(function(){
   
   // US Dept. of Education API
   $('button').click(function(){
+    $('#loading').show();
     query = $('#query').val();
     console.log(query);
     url = 'https://api.data.gov/ed/collegescorecard/v1/schools.json?school.name=' + query + '&api_key=' + myKey;   
@@ -57,8 +55,9 @@ $(document).ready(function(){
         console.log(data);
         collegeData = data.results;
         if (collegeData.length == 0){
-          console.log('length is zero');
-          html += 'No colleges matched your query, try using a search without acronyms or initials';
+          $('#earnings').hide();
+          $('#loading').hide();
+          $('#error').show();
         }
         
         for (i = 0; i < collegeData.length; i++){ //loop through colleges to make cards
@@ -73,8 +72,6 @@ $(document).ready(function(){
             meanEarnings[i] = null;
             namesArray[i] = null;
             continue;
-          }else{
-            numCards++;
           }
           
           meanEarnings[i] = latestData.earnings['8_yrs_after_entry'].median_earnings;
@@ -149,7 +146,7 @@ $(document).ready(function(){
           // Building cards
           {
             html += '<div class="college-card flex" id="card' + i + '">'; //start card
-            html += '<div class="card-header">'; //start header
+            html += '<div class="card-header center-flex">'; //start header
             html += '<h2 class="college-name">' + schoolData.name + '</h2>';
             html += '</div>'; //end header
             html += '<div class="card-info flex-center">'; //start info
@@ -178,13 +175,14 @@ $(document).ready(function(){
             // End building cards
           }
           $('#results').html(html);
+          $('#loading').hide();
         }
         
         meanEarningsClean = meanEarnings.filter(function(v){return v!==null});
         collegeDataClean = collegeData.filter(function(v){return v!==null});
         locationDataClean = locationData.filter(function(v){return v!==null});
         namesArrayClean = namesArray.filter(function(v){return v!==null});
-
+        
         console.log(meanEarningsClean);
         console.log(namesArrayClean);
         
@@ -225,14 +223,13 @@ $(document).ready(function(){
         var marker = new google.maps.Marker({position: collegeCoords, map: map});
       }
     }
-    // End functions
-    function buildChart(){
+    function buildChart(){ // Make chart based off of mean student earnings per college
       var myChart = Highcharts.chart('earnings', {
         chart: {
           type: 'column'
         },
         title: {
-          text: 'Mean Earnings of Students 4 Years After Graduation'
+          text: 'Mean Yearly Salary of Students 4 Years After Graduation'
         },
         subtitle: {
           text: 'Source: U.S. Department of Education'
@@ -251,8 +248,6 @@ $(document).ready(function(){
           data: meanEarningsClean
         }]
       });
+      // End functions
     }
-    
   });
-  
-  
