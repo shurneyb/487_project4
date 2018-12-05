@@ -50,7 +50,7 @@ p{
 
 .card-header{
   grid-area: header;
-  background: rgb(211, 211, 211);
+  background: rgba(211, 211, 211, 0.74);
 }
 
 .card-info{
@@ -70,7 +70,7 @@ p{
 .college-card{
   border: 1px;
   padding: 10px;
-  margin: 10px;
+  margin: 15px 10px;
   box-shadow: 2px 2px 5px #ccc;
 }
 
@@ -125,4 +125,40 @@ button:hover{
   display: none;
 }
 
+#earnings{
+  margin-bottom: 15px;
+}
+
 /* End Body */
+
+/* Mobile Styles */
+
+@media only screen and (max-width: 600px) {
+  body{
+    margin: 0;
+  }
+
+  p{
+    font-size: 12px;
+    margin: 8px 5px;
+  }
+
+  .college-card{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto 400px;
+    grid-gap: 0.25em;
+    background: #fff;
+    grid-template-areas:
+    "header header"
+    "info info"
+    "map map"
+  }
+
+  #earnings{
+    max-width: 95%;
+    margin: auto;
+  }
+}
+
+/* End Mobile Styles */
